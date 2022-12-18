@@ -88,7 +88,16 @@ public class DBHelperPolls extends SQLiteOpenHelper {
         }
         return cursor;
     }
+    Cursor readPollNameFromPollsByIdDistinct(String id){
+        String query = "SELECT * FROM polls ";
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery("SELECT name, MAX(time) FROM " + "polls" + " where id = '" + id + "'" , null);
+        }
+        return cursor;
+    }
     Cursor readAllDataFromQuestionsByID(String id){
         String query = "SELECT * FROM questions WHERE pollId=id";
         SQLiteDatabase db = this.getReadableDatabase();

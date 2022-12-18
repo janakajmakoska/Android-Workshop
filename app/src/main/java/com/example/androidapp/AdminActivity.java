@@ -28,6 +28,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        buttonView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AdminPollsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

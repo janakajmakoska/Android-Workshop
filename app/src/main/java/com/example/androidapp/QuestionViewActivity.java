@@ -18,12 +18,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 
 public class QuestionViewActivity extends AppCompatActivity {
     ArrayList<Questions> questions;
     Questions q;
     DBHelperPolls DBPolls;
+    DBUser DBUser;
     String pollId;
     TextView textViewQuestion;
     TextView textViewQuestionCount;
@@ -51,6 +53,7 @@ public class QuestionViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_view);
         questions = new ArrayList<Questions>();
         DBPolls = new DBHelperPolls(this);
+        DBUser= new DBUser(this);
         questionCountTotal = 0;
         questionCounter = 0;
         answered = false;
@@ -86,11 +89,50 @@ public class QuestionViewActivity extends AppCompatActivity {
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
-                    Toast.makeText(QuestionViewActivity.this, "U selektid snafwe", Toast.LENGTH_SHORT).show();
+                if (rb1.isChecked()) {
+                    Date currentTime = Calendar.getInstance().getTime();
+                    finishPollTime = currentTime.toString();
+                    UUID polls_answersId = UUID.randomUUID();
+
+
+
+                    DBUser.insertData(polls_answersId.toString(), userName, currentQuestion.getName(), rb1.getText().toString() ,finishPollTime, pollId, "Skopje", "Skopje");
+                    Toast.makeText(QuestionViewActivity.this, "Answer Confirmed!", Toast.LENGTH_SHORT).show();
                     answered = true;
-                } else {
-                    Toast.makeText(QuestionViewActivity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
+                } else
+                if (rb2.isChecked()) {
+                    Date currentTime = Calendar.getInstance().getTime();
+                    finishPollTime = currentTime.toString();
+                    UUID polls_answersId = UUID.randomUUID();
+
+
+                    DBUser.insertData(polls_answersId.toString(), userName, currentQuestion.getName(), rb2.getText().toString() ,finishPollTime, pollId, "Skopje", "Skopje");
+                    Toast.makeText(QuestionViewActivity.this, "Answer Confirmed!", Toast.LENGTH_SHORT).show();
+                    answered = true;
+                } else
+                if (rb3.isChecked()) {
+                    Date currentTime = Calendar.getInstance().getTime();
+                    finishPollTime = currentTime.toString();
+                    UUID polls_answersId = UUID.randomUUID();
+
+                    DBUser.insertData(polls_answersId.toString(), userName, currentQuestion.getName(), rb3.getText().toString() ,finishPollTime, pollId, "Skopje", "Skopje");
+                    Toast.makeText(QuestionViewActivity.this, "Answer Confirmed!", Toast.LENGTH_SHORT).show();
+                    answered = true;
+                } else
+                if (rb4.isChecked()) {
+                    Date currentTime = Calendar.getInstance().getTime();
+                    finishPollTime = currentTime.toString();
+                    UUID polls_answersId = UUID.randomUUID();
+
+
+
+                    DBUser.insertData(polls_answersId.toString(), userName, currentQuestion.getName(), rb4.getText().toString() ,finishPollTime, pollId, "Skopje", "Skopje");
+                    Toast.makeText(QuestionViewActivity.this, "Answer Confirmed!", Toast.LENGTH_SHORT).show();
+                    answered = true;
+                }
+
+                else {
+                    Toast.makeText(QuestionViewActivity.this, "Please select an answer!", Toast.LENGTH_SHORT).show();
                 }
 
                 if(answered) {
@@ -98,7 +140,6 @@ public class QuestionViewActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     void storeDataInArraysQuestions() {

@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class UserActivity extends AppCompatActivity {
+public class AdminPollsActivity extends AppCompatActivity {
 
     DBHelperPolls DBPolls;
     RecyclerView recyclerView;
@@ -33,7 +31,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         DBPolls = new DBHelperPolls(this);
-          poll_id = new ArrayList<>();
+        poll_id = new ArrayList<>();
         poll_name = new ArrayList<>();
         poll_time = new ArrayList<>();
         poll_btn = new ArrayList<>();
@@ -50,9 +48,9 @@ public class UserActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-        pollsAdapter = new PollsAdapter(UserActivity.this, poll_id, poll_name, poll_time, poll_btn,userName,false);
+        pollsAdapter = new PollsAdapter(AdminPollsActivity.this, poll_id, poll_name, poll_time, poll_btn,userName,true);
         recyclerView.setAdapter(pollsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(UserActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(AdminPollsActivity.this));
 
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
